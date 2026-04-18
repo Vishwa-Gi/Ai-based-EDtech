@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const otpSchema = new mongoose.Schema(
   {
@@ -20,4 +20,4 @@ const otpSchema = new mongoose.Schema(
 otpSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 const Otps = mongoose.model('Otps', otpSchema);
-module.exports = Otps;
+export default Otps; 

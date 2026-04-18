@@ -9,12 +9,13 @@ const Cart = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await axios.get('/api/cart/getCart', {
+      const response = await axios.get('http://localhost:5000/api/cart/getCart', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `${localStorage.getItem('token')}`,
         },
       });
       setCartItems(response.data.courses);
+      console.log("Fetched Cart Items:", response.data.courses);
       console.log(response.data.courses);
     } catch (error) {
       console.error('Error fetching cart items:', error);
@@ -29,7 +30,7 @@ const Cart = () => {
     try {
       await axios.delete(`/api/cart/cart/${itemId}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `${localStorage.getItem('token')}`,
         },
       });
       fetchCartItems();
@@ -48,13 +49,13 @@ const Cart = () => {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Your Cart</h1>
           <p className="text-gray-500 text-sm">
-            {cartItems.length} {cartItems.length === 1 ? 'course' : 'courses'}
+            {cartItems?.length} {cartItems?.length === 1 ? 'course' : 'courses'}
           </p>
         </div>
       </div>
 
       {/* Empty State */}
-      {cartItems.length === 0 ? (
+      {cartItems?.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
           <div className="bg-indigo-50 p-5 rounded-full">
             <ShoppingCart size={36} className="text-indigo-400" strokeWidth={1.5} />
@@ -73,7 +74,7 @@ const Cart = () => {
         </div>
       ) : (
         <div className="space-y-3">
-          {cartItems.map((item) => (
+          {cartItems?.map((item) => (
             <div
               key={item._id}
               className="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow"
@@ -120,7 +121,7 @@ const Cart = () => {
           {/* Checkout area */}
           <div className="bg-white border border-gray-200 rounded-2xl p-5 mt-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-500">{cartItems.length} course{cartItems.length > 1 ? 's' : ''} in cart</span>
+              <span className="text-sm text-gray-500">{cartItems?.length} course{cartItems?.length > 1 ? 's' : ''} in cart</span>
               <button className="flex items-center gap-2 bg-indigo-600 text-white text-sm font-semibold px-6 py-2.5 rounded-xl hover:bg-indigo-700 active:scale-95 transition-all">
                 Checkout
                 <ArrowRight size={15} />

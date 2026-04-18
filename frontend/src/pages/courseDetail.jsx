@@ -16,14 +16,14 @@ const CourseDetail = () => {
     fetchCourse();
   }, [id]);
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (id) => {
     try {
       const response = await axios.post(
         'http://localhost:5000/api/cart/add',
         { courseId: id },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `${localStorage.getItem('token')}`,
           },
         }
       );
@@ -59,7 +59,7 @@ const CourseDetail = () => {
         </div>
 
         <button
-          onClick={handleAddToCart}
+          onClick={() => handleAddToCart(id)}
           className="mt-6 flex items-center gap-2 bg-white text-indigo-600 font-semibold text-sm px-6 py-2.5 rounded-xl hover:bg-indigo-50 active:scale-95 transition-all shadow"
         >
           <ShoppingCart size={16} />

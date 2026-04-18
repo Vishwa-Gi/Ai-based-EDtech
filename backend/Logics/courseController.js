@@ -80,7 +80,7 @@ export const createCourse = async (req, res) => {
 export const getAllCourses = async (req, res) => {
   try {
     const courses = await Course.find().populate('createdBy', 'name email');
-    console.log("Courses fetched:", courses);
+    // console.log("Courses fetched:", courses);
     res.status(200).json({ courses });
   }
   catch(error) {

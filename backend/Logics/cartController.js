@@ -5,6 +5,7 @@ export const addToCart = async (req, res) => {
   try {
     const userId = req.user._id;
     const { courseId } = req.body;
+    // console.log("Adding to cart:", { userId, courseId });
     let cart = await Cart.findOne({ user: userId });
     if (!cart) {
       cart = new Cart({ user: userId, courses: [] });
@@ -23,10 +24,12 @@ export const addToCart = async (req, res) => {
 export const getCartItems = async (req, res) => {
     try {
         const userId = req.user._id;
-        const cart = await Cart.findOne({ user: userId }).populate('courses');
+        console.log("Fetching cart for user:", userId);
+        const cart = await Cart.findOne({ user: userId }).populate('courses', 'name courseDetails thumbnails');
         if (!cart) {
             return res.status(200).json({ courses: [] });
         }
+        console.log(cart);
         res.status(200).json({ courses: cart.courses });
     } catch (error) {
         res.status(500).json({ message: error.message });

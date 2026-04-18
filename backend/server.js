@@ -24,9 +24,9 @@ connectDB();
 app.use(cors());
 
 app.use(express.json());
-console.log(userRoutes);
+// console.log(userRoutes);
 app.use("/api/users", userRoutes);
-console.log(courseRoutes);
+// console.log(courseRoutes);
 app.use("/api/course", courseRoutes);
 
 app.use("/api/cart", cartRouter);
