@@ -28,7 +28,7 @@ const Cart = () => {
 
   const handleRemoveFromCart = async (itemId) => {
     try {
-      await axios.delete(`/api/cart/cart/${itemId}`, {
+      await axios.delete(`http://localhost:5000/api/cart/cart/${itemId}`, {
         headers: {
           Authorization: `${localStorage.getItem('token')}`,
         },

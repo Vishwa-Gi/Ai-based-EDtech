@@ -28,7 +28,7 @@ const Login = () => {
       setError("Invalid email or password");
     }
 
-    Navigate("/home");
+    Navigate("/Course");
   };
 
   return (
